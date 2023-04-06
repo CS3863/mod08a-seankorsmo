@@ -9,11 +9,13 @@ public class UseData : MonoBehaviour
   * */
 
    List<Dictionary<string, object>> data; 
- /*   public GameObject myCube;//prefab
-    int cubeCount; //variable 
+ //   public GameObject myCube;//prefab
+    int rowCount;
     private float startDelay = 2.0f;
     private float timeInterval = 1.0f;
- */
+    public object tempObj;
+    public float tempFloat;
+ 
     void Awake()
     {
 
@@ -21,23 +23,67 @@ public class UseData : MonoBehaviour
 
         for (var i = 0; i < data.Count; i++)
         {
-            //name, age, speed, description, is the headers of the database
             print("xco2 " + data[i]["xco2"] + " " );
         }
 
+        rowCount = 0;
 
     }//end Awake()
 
     // Use this for initialization
     void Start()
     {
-        
-
-       // InvokeRepeating("SpawnObject", startDelay, timeInterval);
+        while(data != null ) 
+        { 
+            InvokeRepeating("SpawnObject", startDelay, timeInterval); 
+        }
+       
     }//end Start()
 
+
+
+    void SpawnObject()
+    {
+        tempObj = (data[rowCount]["xco2"]);
+        tempFloat = System.Convert.ToSingle(tempObj);
+        tempFloat = (tempFloat - 350.0f) * 5.0f;
+        rowCount++;
+
+        transform.localScale = new Vector3(tempFloat, tempFloat, tempFloat);
+
+        Debug.Log("tempFloat " + tempFloat);
+        Debug.Log("Count " + rowCount);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Update is called once per frame
-    void Update()
+  /*  void Update()
     {
 
         for (var i = 0; i < data.Count; i++)
@@ -50,27 +96,14 @@ public class UseData : MonoBehaviour
 
         //As long as cube count is not zero, instantiate prefab
 
-        /* while (cubeCount > 0)
+         while (cubeCount > 0)
          {
              Instantiate(myCube);
              cubeCount--;
              Debug.Log("cubeCount" + cubeCount);
          }
-         */
+         
 
-    }//end Update()
-
-   /* void SpawnObject()
-    {
-        if(cubeCount > 0)
-        {
-            Instantiate(myCube);
-            cubeCount --;
-            Debug.Log("cubeCount " + cubeCount);
-        }
-    }
-
-    */
-
-
+    }//end Update() 
+  */
 }
